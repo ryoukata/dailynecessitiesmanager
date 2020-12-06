@@ -6,11 +6,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.ArrayList;
+
 @Mapper
 public interface DailyItemMapper {
 
     @Select("SELECT id, name, category FROM daily_items")
-    DailyItem selectAllDailyItems();
+    ArrayList<DailyItem> selectAllDailyItems();
 
     @Insert("INSERT INTO daily_items (name, category) VALUES (#{name}, #{category})")
     @Options(useGeneratedKeys = true, keyProperty = "id")

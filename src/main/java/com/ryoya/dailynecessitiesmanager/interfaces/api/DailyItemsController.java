@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/")
 public class DailyItemsController {
@@ -25,7 +27,7 @@ public class DailyItemsController {
     public String sample() { return "sample get."; }
 
     @RequestMapping(value = "/items", method = RequestMethod.GET)
-    public DailyItem getAllItems() {
+    public ArrayList<DailyItem> getAllItems() {
         return dailyItemMapper.selectAllDailyItems();
     }
 
