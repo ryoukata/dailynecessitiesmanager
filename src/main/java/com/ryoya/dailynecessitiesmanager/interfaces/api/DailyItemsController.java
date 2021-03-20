@@ -1,12 +1,10 @@
 package com.ryoya.dailynecessitiesmanager.interfaces.api;
 
 import com.ryoya.dailynecessitiesmanager.domain.model.DailyItem;
+import com.ryoya.dailynecessitiesmanager.infrastructure.requestData.DailyitemJSON;
 import com.ryoya.dailynecessitiesmanager.mapper.DailyItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -32,9 +30,8 @@ public class DailyItemsController {
     }
 
     @RequestMapping(value = "/insert/item", method = RequestMethod.POST)
-    public DailyItem insertItem(@RequestParam("name") String name,
-                                @RequestParam("category") String category) {
-        DailyItem dailyItem = new DailyItem(name, category);
+    public DailyItem insertItem(@RequestBody DailyitemJSON dailyitemJSON) {
+        DailyItem dailyItem = new DailyItem(dailyitemJSON.getName(), dailyitemJSON.getCategory());
         dailyItemMapper.insert(dailyItem);
         return dailyItemMapper.findDailyItem(dailyItem);
     }
